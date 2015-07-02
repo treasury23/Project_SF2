@@ -12,3 +12,7 @@ _security_logout:
       _controller: FrameworkBundle:Redirect:redirect
       route: /
       permanent: true
+
+show_project:
+    path:     /project
+    defaults: { _controller: RedmineBundle:Project:show }
