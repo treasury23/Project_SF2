@@ -1,3 +1,14 @@
-redmine_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: RedmineBundle:Default:index }
+home:
+    path:     /
+    defaults: { _controller: RedmineBundle:User:home }
+login:
+    pattern:   /login
+    defaults:  { _controller: RedmineBundle:User:login }
+login_check:
+    pattern:   /login_check
+_security_logout:
+    pattern: /logout
+    defaults:
+      _controller: FrameworkBundle:Redirect:redirect
+      route: /
+      permanent: true
