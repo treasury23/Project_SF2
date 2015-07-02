@@ -15,7 +15,6 @@ class ProjectController extends Controller
 
         $issues=$client->api('issue')->showIssueProject($project_id);
 
-
-        return $this->render('RedmineBundle:Project:showProject.html.twig',array('project'=>$project_id,'issues'=>$issues));
+        return $this->render('RedmineBundle:Project:showProject.html.twig',array('project'=>$project_id,'issues'=>$issues{'issues'}));
     }
 }

@@ -2,10 +2,10 @@
 
 {% block body %}
 <div class="wrapper-form-login" style="width: 800px">
-<table data-toggle="table" width="100%" data-sort-name="worker" data-sort-order="desc" class="table table-striped table-bordered table-hover table-condensed">
+<table width="100%" class="table table-striped table-bordered table-hover table-condensed">
     <thead>
-    <th data-field="name" data-sortable="true">Наименование проекта</th>
-    <th data-field="days" data-sortable="true">Дата</th>
+    <th>Наименование проекта</th>
+    <th>Дата</th>
     </thead>
     {% for project in projects %}
     <tr>
