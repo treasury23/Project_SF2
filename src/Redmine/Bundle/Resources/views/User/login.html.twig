@@ -1,16 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% if error %}
-    <div>{{ error.message }}</div>
-{% endif %}
+    <div class="wrapper-form-login">
+        <form action="{{ path('login_check') }}" method="post" class="form-horizontal">
+            <fieldset>
+                <legend>eKreative</legend>
+                {% if error %}
+                    <div class="error">{{ error.message | trans}}</div>
+                {% endif %}
+                <div class="control-group">
+                    <label class="col-sm-2 control-label" for="username">Логин:</label>
+                    <div class="col-sm-10 padding-b20">
+                        <input type="text" id="username" name="_username" class="form-control" placeholder="Логин" value="{{ last_username }}" required/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="col-sm-2 control-label" for="password">Пароль:</label>
+                    <div class="col-sm-10 padding-b20">
+                        <input type="password" id="password" name="_password"  placeholder="Пароль" class="form-control" required/>
+                    </div>
+                </div>
 
-<form action="{{ path('login_check') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
-    <input type="submit" name="login" />
-</form>
+                <div class="control-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <input type="submit" name="login" class="btn btn-default btn-block" value="Войти"/>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 {% endblock %}
+
+
+
