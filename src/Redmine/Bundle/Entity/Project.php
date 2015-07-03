@@ -34,6 +34,13 @@ class Project {
     protected $name;
 
     /**
+     * @ORM\Column(type="integer", name="redmine_id")
+     * @var integer redmineId
+     */
+    protected $redmineId;
+
+
+    /**
      * @ORM\Column(type="datetime", name="created_at")
      *
      * @var DateTime $createdAt
@@ -53,6 +60,14 @@ class Project {
      * @var ArrayCollection $comments;
      **/
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Issue", cascade={"persist"}, mappedBy="project")
+     *
+     * @var ArrayCollection $issues;
+     **/
+    private $issues;
+
 
     /**
      * Constructor
@@ -172,5 +187,61 @@ class Project {
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Add issues
+     *
+     * @param \Redmine\Bundle\Entity\Issue $issues
+     * @return Project
+     */
+    public function addIssue(\Redmine\Bundle\Entity\Issue $issues)
+    {
+        $this->issues[] = $issues;
+
+        return $this;
+    }
+
+    /**
+     * Remove issues
+     *
+     * @param \Redmine\Bundle\Entity\Issue $issues
+     */
+    public function removeIssue(\Redmine\Bundle\Entity\Issue $issues)
+    {
+        $this->issues->removeElement($issues);
+    }
+
+    /**
+     * Get issues
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIssues()
+    {
+        return $this->issues;
+    }
+
+    /**
+     * Set redmineId
+     *
+     * @param integer $redmineId
+     * @return Project
+     */
+    public function setRedmineId($redmineId)
+    {
+        $this->redmineId = $redmineId;
+
+        return $this;
+    }
+
+    /**
+     * Get redmineId
+     *
+     * @return integer 
+     */
+    public function getRedmineId()
+    {
+        return $this->redmineId;
     }
 }

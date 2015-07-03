@@ -34,6 +34,13 @@ class Project {
     protected $name;
 
     /**
+     * @ORM\Column(type="integer", name="redmine_id")
+     * @var integer redmineId
+     */
+    protected $redmineId;
+
+
+    /**
      * @ORM\Column(type="datetime", name="created_at")
      *
      * @var DateTime $createdAt
@@ -53,6 +60,14 @@ class Project {
      * @var ArrayCollection $comments;
      **/
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Issue", cascade={"persist"}, mappedBy="project")
+     *
+     * @var ArrayCollection $issues;
+     **/
+    private $issues;
+
 
     /**
      * Constructor
@@ -126,5 +141,84 @@ class Project {
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Project
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Project
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Add issues
+     *
+     * @param \Redmine\Bundle\Entity\Issue $issues
+     * @return Project
+     */
+    public function addIssue(\Redmine\Bundle\Entity\Issue $issues)
+    {
+        $this->issues[] = $issues;
+
+        return $this;
+    }
+
+    /**
+     * Remove issues
+     *
+     * @param \Redmine\Bundle\Entity\Issue $issues
+     */
+    public function removeIssue(\Redmine\Bundle\Entity\Issue $issues)
+    {
+        $this->issues->removeElement($issues);
+    }
+
+    /**
+     * Get issues
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIssues()
+    {
+        return $this->issues;
     }
 }

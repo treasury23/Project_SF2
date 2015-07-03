@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper-form-login" style="width: 950px">
+        <table width="100%" class="table table-striped table-bordered table-hover table-condensed">
+            <thead>
+                <th>№</th>
+                <th>Статус</th>
+                <th>Приоритет</th>
+                <th>Тема</th>
+                <th>Автор</th>
+                <th>Дата</th>
+            </thead>
+
+            {% for issue in issues %}
+                <tr>
+                    <td>{{ issue.redmineId }}</td>
+                    <td>{{ issue.status }}</td>
+                    <td>{{ issue.priority }}</td>
+                    <td>{{ issue.subject }}</td>
+                    <td>{{ issue.author }}</td>
+                    <td>{{ issue.updatedAt|date("m.d.Y H:i:s") }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

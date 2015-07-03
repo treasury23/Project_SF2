@@ -13,7 +13,7 @@ _security_logout:
       route: /
       permanent: true
 
-show_project:
+show_issue:
     path:     /project
     defaults: { _controller: RedmineBundle:Project:showIssue }
 

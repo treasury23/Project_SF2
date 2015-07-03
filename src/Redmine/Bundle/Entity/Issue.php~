@@ -1,0 +1,252 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: vitya
+ * Date: 03.07.15
+ * Time: 12:52
+ * To change this template use File | Settings | File Templates.
+ */
+
+namespace Redmine\Bundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="Issue")
+ * @ORM\Entity(repositoryClass="Redmine\Bundle\Repository\IssueRepository")
+ */
+class Issue {
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var integer id
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="integer", name="redmine_id")
+     * @var integer redmineId
+     */
+    protected $redmineId;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string status
+     */
+    protected $status;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string priority
+     */
+    protected $priority;
+
+    /**
+     * @ORM\Column(type="string", length=1024)
+     * @var string subject
+     */
+    protected $subject;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string author
+     */
+    protected $author;
+
+    /**
+     * @ORM\Column(type="datetime", name="created_at")
+     *
+     * @var DateTime $createdAt
+     */
+    protected $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at")
+     *
+     * @var DateTime $updatedAt
+     */
+    protected $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="issues")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     *
+     **/
+    private $project;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Issue
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param string $priority
+     * @return Issue
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return string 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * Set subject
+     *
+     * @param string $subject
+     * @return Issue
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * Get subject
+     *
+     * @return string 
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * Set author
+     *
+     * @param string $author
+     * @return Issue
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return string 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Issue
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Issue
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set project
+     *
+     * @param \Redmine\Bundle\Entity\Project $project
+     * @return Issue
+     */
+    public function setProject(\Redmine\Bundle\Entity\Project $project = null)
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return \Redmine\Bundle\Entity\Project 
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+}

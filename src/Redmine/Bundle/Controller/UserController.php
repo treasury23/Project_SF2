@@ -27,6 +27,7 @@ class UserController extends Controller
             foreach($projectsAll{'projects'} as $project){
                 $projects = new Project();
                 $projects->setName($project['name']);
+                $projects->setRedmineId($project['id']);
                 $projects->setCreatedAt(new DateTime($project['created_on']));
                 $projects->setUpdatedAt(new DateTime($project['updated_on']));
 
