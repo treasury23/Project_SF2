@@ -13,7 +13,7 @@
     {% for project in projects %}
     <tr>
         <td>{{ project.name }}</td>
-        <td>{{ project.updatedAt|date("m.d.Y H:i:s") }}</td>
+        <td>{{ project.updatedAt|date("d.m.Y H:i:s") }}</td>
         <td><a href="{{ path('show_issue') }}?id={{ project.id }}">Посмотреть</a></td>
         <td><a href="{{ path('show_comment') }}?id={{ project.id }}">Посмотреть</a></td>
     </tr>

@@ -47,6 +47,14 @@ class Comment {
     protected $user;
 
     /**
+     * @ORM\Column(type="datetime", name="created_at")
+     *
+     * @var DateTime $createdAt
+     */
+    protected $createdAt;
+
+
+    /**
      * Get id
      *
      * @return integer 
@@ -123,5 +131,28 @@ class Comment {
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Comment
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

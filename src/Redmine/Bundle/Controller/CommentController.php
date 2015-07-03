@@ -13,6 +13,7 @@ use Redmine\Bundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Redmine\Bundle\Form\CommentFormType;
+use DateTime;
 
 class CommentController extends Controller
 {
@@ -56,6 +57,7 @@ class CommentController extends Controller
 
                 $data = $form->getData();
                 $data->setUser($this->getUser());
+                $data->setCreatedAt(new DateTime());
                 $data->setProject($project);
 
                 $em = $this->getDoctrine()->getManager();

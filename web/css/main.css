@@ -18,3 +18,23 @@
 textarea{
     resize: none;
 }
+.comment-button{
+    display: inline-block;
+    margin: 20px 0px 0px 120px;
+}
+
+.comment{
+    background-color: #D3D3D3;
+    margin-top: 20px;
+    border-radius: 7px;
+}
+
+.comment-text{
+    padding: 10px;
+}
+
+.comment-user{
+    font-style: italic;
+    padding-bottom: 10px;
+    font-size: 10px;
+}

@@ -19,7 +19,7 @@
                     <td>{{ issue.priority }}</td>
                     <td>{{ issue.subject }}</td>
                     <td>{{ issue.author }}</td>
-                    <td>{{ issue.updatedAt|date("m.d.Y H:i:s") }}</td>
+                    <td>{{ issue.updatedAt|date("d.m.Y H:i:s") }}</td>
                 </tr>
             {% endfor %}
         </table>

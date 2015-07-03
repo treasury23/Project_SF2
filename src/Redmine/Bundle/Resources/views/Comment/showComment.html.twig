@@ -1,12 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    {{ dump(comments) }}
+<div class="wrapper-form-login" style="width: 800px">
+    <div style="text-align: right"><a href="{{ path('add_comment') }}?id={{ project_id }}" class="btn btn-default">Комментировать</a></div>
     {% for comment in comments %}
-        {{ comment.text }}
+    <div class="comment">
+
+            <div class="comment-text">
+                <div class="comment-user">Пользователь: <strong>{{ comment.user }}</strong><span> Дата: {{ comment.createdAt|date("d.m.Y H:i:s") }}</span></div>
+                {{ comment.text }}
+            </div>
+    </div>
     {% endfor %}
-
-    <a href="{{ path('add_comment') }}?id={{ project_id }}"><button type="button" class="btn btn-default btn-sm">Комментировать</button></a>
-
+</div>
 {% endblock %}

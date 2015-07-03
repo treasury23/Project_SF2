@@ -21,6 +21,10 @@ security:
                         test:
                             password: test
                             roles: 'ROLE_USER'
+                        ekreative:
+                            password: 123456
+                            roles: 'ROLE_USER'
+
 
     encoders:
             Symfony\Component\Security\Core\User\User: plaintext
