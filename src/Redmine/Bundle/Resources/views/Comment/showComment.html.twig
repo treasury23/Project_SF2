@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ dump(comments) }}
+    {% for comment in comments %}
+        {{ comment.text }}
+    {% endfor %}
+
+    <a href="{{ path('add_comment') }}?id={{ project_id }}"><button type="button" class="btn btn-default btn-sm">Комментировать</button></a>
+
+{% endblock %}

@@ -16,7 +16,7 @@ class ProjectRepository extends EntityRepository
 {
     public function addProject(Project $project)
     {
-        $em = $this->getEntityManager();
+        $em = $this->getManager();
         $em->persist($project);
         $em->flush();
     }

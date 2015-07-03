@@ -20,7 +20,7 @@ class UserController extends Controller
         //    'limit' => 1000
         //]);
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         if(!empty($projectsAll)){
 

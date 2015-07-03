@@ -26,7 +26,7 @@ class ProjectController extends Controller
         //get data redmine
         //$issuesAll=$client->api('issue')->showIssueProject($project->getRedmineId());
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         if(!empty($issuesAll)){
 
@@ -52,27 +52,4 @@ class ProjectController extends Controller
 
         return $this->render('RedmineBundle:Project:showIssue.html.twig',array('issues'=>$issues));
     }
-
-    public function showCommentAction(Request $request)
-    {
-        $project_id = $request->query->get('id');
-
-        $comments = $this->getDoctrine()
-            ->getRepository('RedmineBundle:Comment')
-            ->getCommentProject($project_id);
-
-        if (!$comments) {
-            throw $this->createNotFoundException('No comments found for id '.$project_id);
-        }
-
-        return $this->render('RedmineBundle:Project:showComment.html.twig',array('comments'=>$comments,'project_id'=>$project_id));
-    }
-
-    public function addCommentAction(Request $request)
-    {
-        $project_id = $request->query->get('id');
-
-        return $this->render('RedmineBundle:Project:addComment.html.twig');
-    }
-
 }
