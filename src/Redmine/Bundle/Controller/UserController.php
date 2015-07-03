@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Redmine;
+use Redmine\Bundle\Entity\Project;
 
 class UserController extends Controller
 {
@@ -13,11 +14,25 @@ class UserController extends Controller
     {
         $client = new Redmine\Client('https://redmine.ekreative.com', '2fda745bb4cdd835fdf41ec1fab82a13ddc1a54c');
 
-        $projects=$client->api('project')->all([
+        $projectsAll=$client->api('project')->all([
             'limit' => 1000
         ]);
 
-        return $this->render('RedmineBundle:User:index.html.twig',array('client'=>$client,'projects'=>$projects{'projects'}));
+        $em = $this->getDoctrine()->getEntityManager();
+
+        foreach($projectsAll{'projects'} as $project){
+            $projects = new Project();
+            $projects->setName($project['name']);
+            $projects->setCreatedAt($project['created_on']);
+            $em->persist($projects);
+        }
+        $em->flush();
+
+        $projects = $this->getDoctrine()
+            ->getRepository('RedmineBundle:Project')
+            ->findAll();
+
+        return $this->render('RedmineBundle:User:index.html.twig',array('projects'=>$projects));
     }
 
     public function loginAction(Request $request)

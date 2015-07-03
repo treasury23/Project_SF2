@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="Comment")
+ * @ORM\Entity(repositoryClass="Redmine\Bundle\Repository\CommentRepository")
  */
 class Comment {
 
@@ -33,11 +34,17 @@ class Comment {
     protected $text;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var integer project
-     */
-    protected $project;
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="comments")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     *
+     **/
+    private $project;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string user
+     */
+    protected $user;
 
     /**
      * Get id
@@ -75,10 +82,10 @@ class Comment {
     /**
      * Set project
      *
-     * @param integer $project
+     * @param \Redmine\Bundle\Entity\Project $project
      * @return Comment
      */
-    public function setProject($project)
+    public function setProject(\Redmine\Bundle\Entity\Project $project = null)
     {
         $this->project = $project;
 
@@ -88,10 +95,33 @@ class Comment {
     /**
      * Get project
      *
-     * @return integer 
+     * @return \Redmine\Bundle\Entity\Project 
      */
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Set user
+     *
+     * @param string $user
+     * @return Comment
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return string 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

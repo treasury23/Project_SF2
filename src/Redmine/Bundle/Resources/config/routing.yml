@@ -15,4 +15,12 @@ _security_logout:
 
 show_project:
     path:     /project
-    defaults: { _controller: RedmineBundle:Project:show }
+    defaults: { _controller: RedmineBundle:Project:showIssue }
+
+show_comment:
+    path:     /comment
+    defaults: { _controller: RedmineBundle:Project:showComment }
+
+add_comment:
+    path:     /comment/add
+    defaults: { _controller: RedmineBundle:Project:addComment }
