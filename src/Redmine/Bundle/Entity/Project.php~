@@ -34,10 +34,18 @@ class Project {
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=32)
-     * @var string created_on
+     * @ORM\Column(type="datetime", name="created_at")
+     *
+     * @var DateTime $createdAt
      */
     protected $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at")
+     *
+     * @var DateTime $updatedAt
+     */
+    protected $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", cascade={"persist"}, mappedBy="project")

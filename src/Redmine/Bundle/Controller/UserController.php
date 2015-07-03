@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Redmine;
 use Redmine\Bundle\Entity\Project;
+use DateTime;
 
 class UserController extends Controller
 {
@@ -14,19 +15,25 @@ class UserController extends Controller
     {
         $client = new Redmine\Client('https://redmine.ekreative.com', '2fda745bb4cdd835fdf41ec1fab82a13ddc1a54c');
 
-        $projectsAll=$client->api('project')->all([
-            'limit' => 1000
-        ]);
+            //Get data redmine
+        //$projectsAll=$client->api('project')->all([
+        //    'limit' => 1000
+        //]);
 
         $em = $this->getDoctrine()->getEntityManager();
 
-        foreach($projectsAll{'projects'} as $project){
-            $projects = new Project();
-            $projects->setName($project['name']);
-            $projects->setCreatedAt($project['created_on']);
-            $em->persist($projects);
+        if(!empty($projectsAll)){
+
+            foreach($projectsAll{'projects'} as $project){
+                $projects = new Project();
+                $projects->setName($project['name']);
+                $projects->setCreatedAt(new DateTime($project['created_on']));
+                $projects->setUpdatedAt(new DateTime($project['updated_on']));
+
+                $em->persist($projects);
+            }
+            $em->flush();
         }
-        $em->flush();
 
         $projects = $this->getDoctrine()
             ->getRepository('RedmineBundle:Project')

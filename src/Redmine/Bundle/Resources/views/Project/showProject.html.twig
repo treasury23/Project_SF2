@@ -11,6 +11,7 @@
                 <th>Автор</th>
                 <th>Дата</th>
             </thead>
+            {{ dump(issues) }}
             {% for issue in issues %}
                 <tr>
                     <td>{{ issue.id }}</td>

@@ -34,10 +34,18 @@ class Project {
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=32)
-     * @var string created_on
+     * @ORM\Column(type="datetime", name="created_at")
+     *
+     * @var DateTime $createdAt
      */
     protected $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at")
+     *
+     * @var DateTime $updatedAt
+     */
+    protected $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", cascade={"persist"}, mappedBy="project")
@@ -123,7 +131,7 @@ class Project {
     /**
      * Set createdAt
      *
-     * @param string $createdAt
+     * @param \DateTime $createdAt
      * @return Project
      */
     public function setCreatedAt($createdAt)
@@ -136,10 +144,33 @@ class Project {
     /**
      * Get createdAt
      *
-     * @return string 
+     * @return \DateTime 
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Project
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
