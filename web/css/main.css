@@ -14,3 +14,7 @@
     color: red;
     padding-bottom: 10px;
 }
+
+textarea{
+    resize: none;
+}

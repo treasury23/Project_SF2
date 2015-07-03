@@ -1,1 +1,22 @@
-hello
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wrapper-form-login">
+    <form action="" method="post" {{ form_enctype(form) }} class="form-horizontal">
+        <fieldset>
+            <legend>Добавить комментарий</legend>
+            <div class="error">
+                {{ form_errors(form) }}
+            </div>
+            <div class="control-group">
+                {{ form_label(form.text, null, { 'label_attr': { 'class': 'col-sm-3 control-label'} }) }}
+                <div class="col-sm-9 tmsh-padding-b20">
+                    {{ form_widget(form.text, { 'attr': { 'class': 'form-control', 'rows':5} }) }}
+                </div>
+            </div>
+            {{ form_rest(form) }}
+            <div style="text-align: center"><input type="submit" class="btn btn-default" value="Добавить"/><a href="{{ path('show_comment') }}?id={{ project_id }}" style="margin-left:30px" class="btn btn-default" >Отмена</a></div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

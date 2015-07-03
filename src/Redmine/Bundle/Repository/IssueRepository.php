@@ -14,7 +14,8 @@ use Doctrine\ORM\EntityRepository;
 
 class IssueRepository extends EntityRepository
 {
-    public function getIssueProject($project_id){
+    public function getIssueProject($project_id)
+    {
         $qb = $this->_em->createQueryBuilder();
 
         $qb->select('a')

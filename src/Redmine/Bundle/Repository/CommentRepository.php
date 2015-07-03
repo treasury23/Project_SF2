@@ -14,7 +14,8 @@ use Doctrine\ORM\EntityRepository;
 
 class CommentRepository extends EntityRepository
 {
-    public function getCommentProject($project_id){
+    public function getCommentProject($project_id)
+    {
         $qb = $this->_em->createQueryBuilder();
 
         $qb->select('a')
