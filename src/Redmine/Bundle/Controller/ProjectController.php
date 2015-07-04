@@ -24,24 +24,30 @@ class ProjectController extends Controller
         $client = new Redmine\Client('https://redmine.ekreative.com', '2fda745bb4cdd835fdf41ec1fab82a13ddc1a54c');
 
         //get data redmine
-        //$issuesAll=$client->api('issue')->showIssueProject($project->getRedmineId());
+        $issuesAll=$client->api('issue')->showIssueProject($project->getRedmineId());
 
         $em = $this->getDoctrine()->getManager();
 
         if(!empty($issuesAll)){
 
-            foreach($issuesAll{'issues'} as $issue){
-                $issues = new Issue();
-                $issues->setRedmineId($issue['id']);
-                $issues->setStatus($issue['status']['name']);
-                $issues->setPriority($issue['priority']['name']);
-                $issues->setAuthor($issue['author']['name']);
-                $issues->setSubject($issue['subject']);
-                $issues->setCreatedAt(new DateTime($issue['created_on']));
-                $issues->setUpdatedAt(new DateTime($issue['updated_on']));
-                $issues->setProject($project);
+            foreach($issuesAll{'issues'} as $issueRm){
 
-                $em->persist($issues);
+                $issue = $em->getRepository('RedmineBundle:Issue')->findOneByRedmineId($issueRm['id']);
+
+                if($issue==null){
+                    $issue = new Issue();
+                }
+
+                $issue->setRedmineId($issueRm['id']);
+                $issue->setStatus($issueRm['status']['name']);
+                $issue->setPriority($issueRm['priority']['name']);
+                $issue->setAuthor($issueRm['author']['name']);
+                $issue->setSubject($issueRm['subject']);
+                $issue->setCreatedAt(new DateTime($issueRm['created_on']));
+                $issue->setUpdatedAt(new DateTime($issueRm['updated_on']));
+                $issue->setProject($project);
+
+                $em->persist($issue);
             }
             $em->flush();
         }

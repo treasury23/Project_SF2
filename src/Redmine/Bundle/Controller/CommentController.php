@@ -29,13 +29,6 @@ class CommentController extends Controller
         //    throw $this->createNotFoundException('No comments found for id '.$project_id);
         //}
 
-        return $this->render('RedmineBundle:Comment:showComment.html.twig',array('comments'=>$comments, 'project_id'=>$project_id));
-    }
-
-    public function addCommentAction(Request $request)
-    {
-        $project_id = $request->query->get('id');
-
         $comment = new Comment();
         $form = $this->createForm(new CommentFormType(),$comment);
 
@@ -57,7 +50,6 @@ class CommentController extends Controller
 
                 $data = $form->getData();
                 $data->setUser($this->getUser());
-                $data->setCreatedAt(new DateTime());
                 $data->setProject($project);
 
                 $em = $this->getDoctrine()->getManager();
@@ -68,7 +60,6 @@ class CommentController extends Controller
             }
         }
 
-        return $this->render('RedmineBundle:Comment:addComment.html.twig', array('form'=>$form->createView(),'project_id'=>$project_id));
+        return $this->render('RedmineBundle:Comment:showComment.html.twig',array('form'=>$form->createView(),'comments'=>$comments, 'project_id'=>$project_id));
     }
-
 }

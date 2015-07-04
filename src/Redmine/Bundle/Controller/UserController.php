@@ -16,23 +16,30 @@ class UserController extends Controller
         $client = new Redmine\Client('https://redmine.ekreative.com', '2fda745bb4cdd835fdf41ec1fab82a13ddc1a54c');
 
             //Get data redmine
-        //$projectsAll=$client->api('project')->all([
-        //    'limit' => 1000
-        //]);
+        $projectsAll=$client->api('project')->all([
+            'limit' => 1000
+        ]);
 
         $em = $this->getDoctrine()->getManager();
 
         if(!empty($projectsAll)){
 
-            foreach($projectsAll{'projects'} as $project){
-                $projects = new Project();
-                $projects->setName($project['name']);
-                $projects->setRedmineId($project['id']);
-                $projects->setCreatedAt(new DateTime($project['created_on']));
-                $projects->setUpdatedAt(new DateTime($project['updated_on']));
+            foreach($projectsAll{'projects'} as $projectRm){
 
-                $em->persist($projects);
-            }
+                $project = $em->getRepository('RedmineBundle:Project')->findOneByRedmineId($projectRm['id']);
+
+                if($project==null){
+                    $project = new Project();
+                }
+
+                $project->setName($projectRm['name']);
+                $project->setRedmineId($projectRm['id']);
+                $project->setCreatedAt(new DateTime($projectRm['created_on']));
+                $project->setUpdatedAt(new DateTime($projectRm['updated_on']));
+
+                $em->persist($project);
+                }
+
             $em->flush();
         }
 

@@ -20,12 +20,12 @@ textarea{
 }
 .comment-button{
     display: inline-block;
-    margin: 20px 0px 0px 120px;
+    margin: 20px 0px 0px 270px;
 }
 
 .comment{
     background-color: #D3D3D3;
-    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 7px;
 }
 

@@ -20,7 +20,3 @@ show_issue:
 show_comment:
     path:     /comment
     defaults: { _controller: RedmineBundle:Comment:showComment }
-
-add_comment:
-    path:     /comment/add
-    defaults: { _controller: RedmineBundle:Comment:addComment }
