@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: vitya
- * Date: 03.07.15
- * Time: 15:09
- * To change this template use File | Settings | File Templates.
- */
 
 namespace Redmine\Bundle\Form;
 
@@ -14,21 +7,22 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class CommentFormType extends AbstractType
+class IssueFormType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text', 'textarea',  array('label'=>'Comment:',
-            'attr'=>array('placeholder' => 'Enter text', 'maxlength' => 1024),
+        $builder->add('done', 'integer',  array('label'=>'% Done',
+            'attr'=>array('min'=>0, 'max'=>100 ),
             'required'=>true,
             'trim' => true,
-            'constraints' => new NotBlank()));
+            'constraints' => new Length(array('max' => 3))));
     }
 
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class' => 'Redmine\Bundle\Entity\Comment',
+            'data_class' => 'Redmine\Bundle\Entity\Issue',
         );
     }
 
@@ -39,6 +33,6 @@ class CommentFormType extends AbstractType
      */
     public function getName()
     {
-        return 'comment';
+        return 'issue';
     }
 }

@@ -1,6 +1,12 @@
-/*---------Login-----------*/
+body{
+    background-color: #206D6A !important;
+}
 .padding-b20{
     margin-bottom: 20px;
+}
+#header{
+    height: 30px;
+    background-color: #E7E4E4;
 }
 .wrapper-form-login{
     width: 500px;
@@ -37,4 +43,12 @@ textarea{
     font-style: italic;
     padding-bottom: 10px;
     font-size: 10px;
+}
+.schedule-issue td, .schedule-issue th{
+    width: 200px;
+    height: 40px;
+}
+.head-menu{
+    float: right;
+    padding: 0px 20px
 }

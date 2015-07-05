@@ -35,7 +35,7 @@ class Project {
 
     /**
      * @ORM\Column(type="integer", name="redmine_id")
-     * @var integer redmineId
+     * @var integer $redmineId
      */
     protected $redmineId;
 

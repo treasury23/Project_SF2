@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wrapper-form-login" style="width: 800px">
+    <div><h2>{{ issue.subject }}(#{{ issue.redmineId }})</h2></div>
+    <table class="schedule-issue">
+    <tr>
+        <th>Status:</th>
+        <td style="width: 300px">{{ issue.status }}</td>
+        <th>% Done</th>
+        <td style="text-align: right">{{ issue.done }}</td>
+    </tr>
+    <tr>
+        <th>Priority:</th>
+        <td>{{ issue.priority }}</td>
+        <th>Estimated time:</th>
+        <td style="text-align: right">{{ issue.estimated|number_format(2) }} hours</td>
+    </tr>
+    <tr>
+        <th>Start date:</th>
+        <td>{{ issue.start|date("d.m.Y") }}</td>
+        <th>Spent time:</th>
+        <td style="text-align: right">{{ issue.spent|number_format(2) }} hours</td>
+    </tr>
+</table>
+    <div style="text-align: right; padding-top: 20px"><a href="{{ path('log_time') }}?id={{ issue.id }}"><button type="button" class="btn btn-default btn-sm">Log time</button></a></div>
+<div>
+{% endblock %}

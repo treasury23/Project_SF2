@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Home{% endblock %}</title>
+        <title>{% block title %}eKreative{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
@@ -11,6 +11,13 @@
         <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
     </head>
     <body>
+    {% block menu %}
+        <div id="header">
+            <div class="head-menu" style="float: left"><a href="{{ path('home') }}">Home</a></div>
+            <div class="head-menu"><a href="/logout">Logout </a></div>
+            <div class="head-menu">Logged in as <strong>{{ app.user }}</strong></div>
+        </div>
+    {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

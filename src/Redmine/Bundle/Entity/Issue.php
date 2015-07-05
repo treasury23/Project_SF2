@@ -72,6 +72,32 @@ class Issue {
     protected $updatedAt;
 
     /**
+     * @ORM\Column(type="date", nullable=true)
+     *
+     * @var Date $start
+     */
+    protected $start;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer $done
+     */
+    protected $done;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     * @var integer $estimated
+     */
+    protected $estimated;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     * @var integer $spent
+     */
+    protected $spent;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="issues")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      *
@@ -271,5 +297,97 @@ class Issue {
     public function getRedmineId()
     {
         return $this->redmineId;
+    }
+
+    /**
+     * Set done
+     *
+     * @param integer $done
+     * @return Issue
+     */
+    public function setDone($done)
+    {
+        $this->done = $done;
+
+        return $this;
+    }
+
+    /**
+     * Get done
+     *
+     * @return integer 
+     */
+    public function getDone()
+    {
+        return $this->done;
+    }
+
+    /**
+     * Set start
+     *
+     * @param \DateTime $start
+     * @return Issue
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    /**
+     * Get start
+     *
+     * @return \DateTime 
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * Set estimated
+     *
+     * @param string $estimated
+     * @return Issue
+     */
+    public function setEstimated($estimated)
+    {
+        $this->estimated = $estimated;
+
+        return $this;
+    }
+
+    /**
+     * Get estimated
+     *
+     * @return string 
+     */
+    public function getEstimated()
+    {
+        return $this->estimated;
+    }
+
+    /**
+     * Set spent
+     *
+     * @param string $spent
+     * @return Issue
+     */
+    public function setSpent($spent)
+    {
+        $this->spent = $spent;
+
+        return $this;
+    }
+
+    /**
+     * Get spent
+     *
+     * @return string 
+     */
+    public function getSpent()
+    {
+        return $this->spent;
     }
 }

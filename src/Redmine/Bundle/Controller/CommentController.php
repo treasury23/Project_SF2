@@ -25,10 +25,6 @@ class CommentController extends Controller
             ->getRepository('RedmineBundle:Comment')
             ->getCommentProject($project_id);
 
-        //if (!$comments) {
-        //    throw $this->createNotFoundException('No comments found for id '.$project_id);
-        //}
-
         $comment = new Comment();
         $form = $this->createForm(new CommentFormType(),$comment);
 

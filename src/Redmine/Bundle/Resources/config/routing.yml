@@ -17,6 +17,14 @@ show_issue:
     path:     /project
     defaults: { _controller: RedmineBundle:Project:showIssue }
 
+schedule_issue:
+    path:     /issue/schedule
+    defaults: { _controller: RedmineBundle:Project:scheduleIssue }
+
 show_comment:
     path:     /comment
     defaults: { _controller: RedmineBundle:Comment:showComment }
+
+log_time:
+    path:     /time/add
+    defaults: { _controller: RedmineBundle:Log:addSpent }

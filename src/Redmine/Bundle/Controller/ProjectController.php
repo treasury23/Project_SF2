@@ -58,4 +58,46 @@ class ProjectController extends Controller
 
         return $this->render('RedmineBundle:Project:showIssue.html.twig',array('issues'=>$issues));
     }
+
+    public function scheduleIssueAction(Request $request)
+    {
+        $issue_id = $request->query->get('id');
+        $issue = $this->getDoctrine()
+            ->getRepository('RedmineBundle:Issue')
+            ->find($issue_id);
+
+        if (!$issue) {
+            throw $this->createNotFoundException('Project not found for id '.$issue_id);
+        }
+
+        $client = new Redmine\Client('https://redmine.ekreative.com', '2fda745bb4cdd835fdf41ec1fab82a13ddc1a54c');
+
+        //get data redmine
+        $issueSchedule=$client->api('issue')->show($issue->getRedmineId());
+        $em = $this->getDoctrine()->getManager();
+
+        if(!empty($issueSchedule)){
+
+            if(!empty($issueSchedule['issue']['start_date'])){
+                $issue->setStart(new DateTime($issueSchedule['issue']['start_date']));
+            }
+
+            if($issue->getDone()==null && !empty($issueSchedule['issue']['done_ratio'])){
+                $issue->setDone($issueSchedule['issue']['done_ratio']);
+            }
+
+            if(!empty($issueSchedule['issue']['estimated_hours'])){
+                $issue->setEstimated($issueSchedule['issue']['estimated_hours']);
+            }
+
+            if(!empty($issueSchedule['issue']['spent_hours'])){
+                $issue->setSpent($issueSchedule['issue']['spent_hours']);
+            }
+
+                $em->persist($issue);
+                $em->flush();
+        }
+
+        return $this->render('RedmineBundle:Project:scheduleIssue.html.twig',array('issue'=>$issue));
+    }
 }

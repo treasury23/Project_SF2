@@ -6,14 +6,14 @@
     {% for comment in comments %}
     <div class="comment">
             <div class="comment-text">
-                <div class="comment-user">Пользователь: <strong>{{ comment.user }}</strong><span> Дата: {{ comment.createdAt|date("d.m.Y H:i:s") }}</span></div>
+                <div class="comment-user">User: <strong>{{ comment.user }}</strong><span> Date: {{ comment.createdAt|date("d.m.Y H:i:s") }}</span></div>
                 {{ comment.text }}
             </div>
     </div>
     {% endfor %}
     <form action="" method="post" {{ form_enctype(form) }} class="form-horizontal">
         <fieldset>
-            <legend>Добавить комментарий</legend>
+            <legend>Add comment</legend>
             <div class="error">
                 {{ form_errors(form) }}
             </div>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             {{ form_rest(form) }}
-            <div class="comment-button"><input type="submit" class="btn btn-default" value="Добавить"/><a href="{{ path('home') }}" style="margin-left:30px" class="btn btn-default" >Отмена</a></div>
+            <div class="comment-button"><input type="submit" class="btn btn-default" value="Save"/><a href="{{ path('home') }}" style="margin-left:30px" class="btn btn-default" >Cancel</a></div>
         </fieldset>
     </form>
 </div>
