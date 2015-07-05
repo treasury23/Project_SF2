@@ -60,39 +60,39 @@ class Issue {
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var DateTime createdAt
      */
     protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", name="updated_at")
      *
-     * @var DateTime $updatedAt
+     * @var DateTime updatedAt
      */
     protected $updatedAt;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      *
-     * @var Date $start
+     * @var Date start
      */
     protected $start;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @var integer $done
+     * @var integer done
      */
     protected $done;
 
     /**
-     * @ORM\Column(type="decimal", scale=1, nullable=true)
-     * @var integer $estimated
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     * @var decimal estimated
      */
     protected $estimated;
 
     /**
-     * @ORM\Column(type="decimal", scale=1, nullable=true)
-     * @var integer $spent
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     * @var decimal spent
      */
     protected $spent;
 
@@ -103,6 +103,13 @@ class Issue {
      *
      **/
     private $project;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Log", cascade={"persist"}, mappedBy="issue")
+     *
+     * @var ArrayCollection $logs;
+     **/
+    private $logs;
 
 
     /**
@@ -343,5 +350,51 @@ class Issue {
     public function getStart()
     {
         return $this->start;
+    }
+
+    /**
+     * Set estimated
+     *
+     * @param string $estimated
+     * @return Issue
+     */
+    public function setEstimated($estimated)
+    {
+        $this->estimated = $estimated;
+
+        return $this;
+    }
+
+    /**
+     * Get estimated
+     *
+     * @return string 
+     */
+    public function getEstimated()
+    {
+        return $this->estimated;
+    }
+
+    /**
+     * Set spent
+     *
+     * @param string $spent
+     * @return Issue
+     */
+    public function setSpent($spent)
+    {
+        $this->spent = $spent;
+
+        return $this;
+    }
+
+    /**
+     * Get spent
+     *
+     * @return string 
+     */
+    public function getSpent()
+    {
+        return $this->spent;
     }
 }

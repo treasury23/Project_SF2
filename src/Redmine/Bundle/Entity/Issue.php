@@ -60,39 +60,39 @@ class Issue {
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var DateTime createdAt
      */
     protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", name="updated_at")
      *
-     * @var DateTime $updatedAt
+     * @var DateTime updatedAt
      */
     protected $updatedAt;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      *
-     * @var Date $start
+     * @var Date start
      */
     protected $start;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @var integer $done
+     * @var integer done
      */
     protected $done;
 
     /**
      * @ORM\Column(type="decimal", scale=2, nullable=true)
-     * @var integer $estimated
+     * @var decimal estimated
      */
     protected $estimated;
 
     /**
      * @ORM\Column(type="decimal", scale=2, nullable=true)
-     * @var integer $spent
+     * @var decimal spent
      */
     protected $spent;
 
@@ -103,6 +103,13 @@ class Issue {
      *
      **/
     private $project;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Log", cascade={"persist"}, mappedBy="issue")
+     *
+     * @var ArrayCollection $logs;
+     **/
+    private $logs;
 
 
     /**
@@ -389,5 +396,45 @@ class Issue {
     public function getSpent()
     {
         return $this->spent;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->logs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add logs
+     *
+     * @param \Redmine\Bundle\Entity\Log $logs
+     * @return Issue
+     */
+    public function addLog(\Redmine\Bundle\Entity\Log $logs)
+    {
+        $this->logs[] = $logs;
+
+        return $this;
+    }
+
+    /**
+     * Remove logs
+     *
+     * @param \Redmine\Bundle\Entity\Log $logs
+     */
+    public function removeLog(\Redmine\Bundle\Entity\Log $logs)
+    {
+        $this->logs->removeElement($logs);
+    }
+
+    /**
+     * Get logs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLogs()
+    {
+        return $this->logs;
     }
 }

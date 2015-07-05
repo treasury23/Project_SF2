@@ -25,4 +25,17 @@ class IssueRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getSpentIssue($project_id)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('sum(a.spent) as spent')
+            ->from('Redmine\Bundle\Entity\Issue', 'a')
+            ->where('a.project = :project_id')
+            ->groupBy('a.project')
+            ->setParameter('project_id', $project_id);
+
+        return $qb->getQuery()->getResult();
+    }
 }

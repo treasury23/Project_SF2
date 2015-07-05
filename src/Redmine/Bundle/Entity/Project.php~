@@ -43,16 +43,23 @@ class Project {
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var DateTime createdAt
      */
     protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", name="updated_at")
      *
-     * @var DateTime $updatedAt
+     * @var DateTime updatedAt
      */
     protected $updatedAt;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     * @var decimal spent
+     */
+    protected $spent;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", cascade={"persist"}, mappedBy="project")
@@ -220,5 +227,28 @@ class Project {
     public function getIssues()
     {
         return $this->issues;
+    }
+
+    /**
+     * Set redmineId
+     *
+     * @param integer $redmineId
+     * @return Project
+     */
+    public function setRedmineId($redmineId)
+    {
+        $this->redmineId = $redmineId;
+
+        return $this;
+    }
+
+    /**
+     * Get redmineId
+     *
+     * @return integer 
+     */
+    public function getRedmineId()
+    {
+        return $this->redmineId;
     }
 }

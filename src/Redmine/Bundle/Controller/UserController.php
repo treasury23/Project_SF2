@@ -27,6 +27,7 @@ class UserController extends Controller
             foreach($projectsAll{'projects'} as $projectRm){
 
                 $project = $em->getRepository('RedmineBundle:Project')->findOneByRedmineId($projectRm['id']);
+                $spent = $em->getRepository('RedmineBundle:Issue')->getSpentIssue($project->getId());
 
                 if($project==null){
                     $project = new Project();
@@ -36,6 +37,10 @@ class UserController extends Controller
                 $project->setRedmineId($projectRm['id']);
                 $project->setCreatedAt(new DateTime($projectRm['created_on']));
                 $project->setUpdatedAt(new DateTime($projectRm['updated_on']));
+
+                if(!empty($spent[0]['spent'])){
+                    $project->setSpent($spent[0]['spent']);
+                }
 
                 $em->persist($project);
                 }

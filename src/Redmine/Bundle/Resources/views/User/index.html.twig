@@ -6,6 +6,7 @@
     <thead>
         <th>Project</th>
         <th>Date</th>
+        <th>Spent time</th>
         <th>Comment</th>
     </thead>
 
@@ -13,6 +14,7 @@
     <tr>
         <td><a href="{{ path('show_issue') }}?id={{ project.id }}">{{ project.name }}</a></td>
         <td>{{ project.updatedAt|date("d.m.Y H:i:s") }}</td>
+        <td>{{ project.spent }}</td>
         <td><a href="{{ path('show_comment') }}?id={{ project.id }}">Comment</a></td>
     </tr>
     {% endfor %}

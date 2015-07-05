@@ -82,7 +82,7 @@ class ProjectController extends Controller
                 $issue->setStart(new DateTime($issueSchedule['issue']['start_date']));
             }
 
-            if($issue->getDone()==null && !empty($issueSchedule['issue']['done_ratio'])){
+            if(!empty($issueSchedule['issue']['done_ratio'])){
                 $issue->setDone($issueSchedule['issue']['done_ratio']);
             }
 
@@ -90,14 +90,22 @@ class ProjectController extends Controller
                 $issue->setEstimated($issueSchedule['issue']['estimated_hours']);
             }
 
-            if(!empty($issueSchedule['issue']['spent_hours'])){
-                $issue->setSpent($issueSchedule['issue']['spent_hours']);
+            //if($issue->getSpent()==null && !empty($issueSchedule['issue']['spent_hours'])){
+            //    $issue->setSpent($issueSchedule['issue']['spent_hours']);
+            //}
+
+            $spent = $this->getDoctrine()
+                ->getRepository('RedmineBundle:Log')
+                ->getSpent($issue->getId());
+
+            if(!empty($spent[0]['spent'])){
+                $issue->setSpent($spent[0]['spent']);
             }
 
-                $em->persist($issue);
+            $em->persist($issue);
                 $em->flush();
         }
 
-        return $this->render('RedmineBundle:Project:scheduleIssue.html.twig',array('issue'=>$issue));
+        return $this->render('RedmineBundle:Project:scheduleIssue.html.twig',array('issue'=>$issue, 'spent'=>$spent));
     }
 }
